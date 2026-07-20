@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryan Waymire | Administrative Portal</title>
+  <link rel="stylesheet" href="style.css?v=4">
+  <style>
+    body {
+      background-color: var(--bg-secondary);
+      padding: 40px 0;
+    }
+    
+    .admin-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--bg-primary);
+      padding: 3rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.5rem;
+    }
+
+    .admin-header h1 {
+      font-size: 1.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .back-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Tab navigation style */
+    .admin-nav {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-primary);
+      background-color: var(--border-color);
+    }
+
+    .tab-btn.active {
+      color: #ffffff;
+      background-color: var(--text-primary);
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Login Dialog */
+    .login-overlay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-secondary);
+      z-index: 1000;
+    }
+
+    .login-card {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      padding: 2.5rem;
+      border-radius: 4px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .login-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Actions Panel */
+    .actions-panel {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .status-msg {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .status-success {
+      color: #10b981;
+    }
+
+    .status-error {
+      color: #ef4444;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Gate -->
+  <div class="login-overlay" id="login-overlay">
+    <div class="login-card">
+      <h2>Administrative Access</h2>
+      <p>Enter passcode to customize site configurations.</p>
+      <form id="login-form">
+        <div class="form-group" style="margin-bottom: 1.5rem; text-align: left;">
+          <label for="passcode">Passcode</label>
+          <input type="password" id="passcode" class="form-control" placeholder="••••••••" required autofocus>
+        </div>
+        <button type="submit" class="btn" style="width: 100%;">Unlock Portal</button>
+        <div id="login-error" class="status-error" style="margin-top: 1rem; font-size: 0.85rem; display: none;">Invalid passcode. Please try again.</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Administrative Editor -->
+  <main class="container">
+    <div class="admin-container">
+      <div class="admin-header">
+        <div>
+          <h1>Ryan Waymire</h1>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Site Information Management Console</p>
+        </div>
+        <a href="/" class="back-link">&larr; Public Website</a>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="admin-nav">
+        <button class="tab-btn active" data-tab="general-tab">General Info</button>
+        <button class="tab-btn" data-tab="hero-tab">Hero Section</button>
+        <button class="tab-btn" data-tab="services-tab">Services Grid</button>
+        <button class="tab-btn" data-tab="pricing-tab">Pricing Table</button>
+        <button class="tab-btn" data-tab="about-tab">About Paragraphs</button>
+      </div>
+
+      <!-- Editor Form -->
+      <form id="editor-form">
+        
+        <!-- Tab 1: General Info -->
+        <div class="form-section active" id="general-tab">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="text" id="phone" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Contact Email</label>
+              <input type="email" id="email" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="license">CSLB C-10 License Number</label>
+            <input type="text" id="license" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="calendly">Calendly Booking Link</label>
+            <input type="url" id="calendly" class="form-control" placeholder="https://calendly.com/your-username" required>
+          </div>
+        </div>
+
+        <!-- Tab 2: Hero Section -->
+        <div class="form-section" id="hero-tab">
+          <div class="form-group">
+            <label for="hero-headline">Headline</label>
+            <input type="text" id="hero-headline" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="hero-subheadline">Subheadline</label>
+            <textarea id="hero-subheadline" class="form-control" required></textarea>
+          </div>
+        </div>
+
+        <!-- Tab 3: Services Grid -->
+        <div class="form-section" id="services-tab">
+          <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 0.5rem;">Column 1: Industrial</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="service-ind-title">Title</label>
+              <input type="text" id="service-ind-title" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="service-ind-desc">Description</label>
+              <textarea id="service-ind-desc" class="form-control" required></textarea>
+            </div>
+          </div>
+
+          <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 0.5rem; margin-top: 1rem;">Column 2: Emergency</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="service-em-title">Title</label>
+              <input type="text" id="service-em-title" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="service-em-desc">Description</label>
+              <textarea id="service-em-desc" class="form-control" required></textarea>
+            </div>
+          </div>
+
+          <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 0.5rem; margin-top: 1rem;">Column 3: Residential</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="service-res-title">Title</label>
+              <input type="text" id="service-res-title" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="service-res-desc">Description</label>
+              <textarea id="service-res-desc" class="form-control" required></textarea>
+            </div>
+          </div>
+
+          <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 0.5rem; margin-top: 1rem;">Column 4: Medium Voltage</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="service-mv-title">Title</label>
+              <input type="text" id="service-mv-title" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="service-mv-desc">Description</label>
+              <textarea id="service-mv-desc" class="form-control" required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Pricing Table -->
+        <div class="form-section" id="pricing-tab">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="price-ind-rate">Industrial Rate</label>
+              <input type="text" id="price-ind-rate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="price-ind-details">Industrial Details</label>
+              <input type="text" id="price-ind-details" class="form-control" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="price-com-rate">Commercial Rate</label>
+              <input type="text" id="price-com-rate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="price-com-details">Commercial Details</label>
+              <input type="text" id="price-com-details" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="price-em-rate">Emergency Rate</label>
+              <input type="text" id="price-em-rate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="price-em-details">Emergency Details</label>
+              <input type="text" id="price-em-details" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="price-res-rate">Residential Rate</label>
+              <input type="text" id="price-res-rate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="price-res-details">Residential Details</label>
+              <input type="text" id="price-res-details" class="form-control" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 5: About Section -->
+        <div class="form-section" id="about-tab">
+          <div class="form-group">
+            <label for="about-p1">Biography Paragraph 1</label>
+            <textarea id="about-p1" class="form-control" style="min-height: 140px;" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="about-p2">Biography Paragraph 2</label>
+            <textarea id="about-p2" class="form-control" style="min-height: 140px;" required></textarea>
+          </div>
+        </div>
+
+        <!-- Actions Footer -->
+        <div class="actions-panel">
+          <span id="save-status" class="status-msg"></span>
+          <button type="submit" class="btn" id="save-btn">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const DEFAULT_PASSCODE = 'Iamseatedinanoffice.1992';
+    
+    // Default site values (matches landing page initial state)
+    const defaults = {
+      general: {
+        phone: "(909) 555-0199",
+        email: "service@ryanwaymire.com",
+        license: "1084920",
+        calendly: "https://calendly.com/ryanwaymire"
+      },
+      hero: {
+        headline: "Expert Diagnostics. Reliable Power.",
+        subheadline: "Industrial controls, commercial infrastructure, and premium residential upgrades serving the Inland Empire, High Desert, and Mountain Communities."
+      },
+      services: {
+        industrial: {
+          title: "Industrial & Commercial",
+          desc: "Specializing in PLCs, motor controls, medium voltage distribution, and facility maintenance to minimize downtime."
+        },
+        mv: {
+          title: "Medium Voltage Terminations",
+          desc: "Certified by AVO Training Institute for medium-voltage cable splicing and terminating (up to 35kV) to ensure safe, compliant industrial installations."
+        },
+        emergency: {
+          title: "24/7 Emergency Diagnostics",
+          desc: "Rapid-response troubleshooting for critical infrastructure and manufacturing operations. We find faults others miss."
+        },
+        residential: {
+          title: "Residential Upgrades",
+          desc: "Code-compliant panel upgrades (100A to 200A) and dedicated circuitry for modern mountain homes."
+        }
+      },
+      pricing: {
+        industrial: {
+          rate: "$150 – $225 / hr",
+          details: "Time & Materials, 4-hour minimum. Includes PLC diagnostics and system telemetry analysis."
+        },
+        commercial: {
+          rate: "$130 – $175 / hr",
+          details: "Facility infrastructure, circuit isolation, and distribution work. Custom project bidding available."
+        },
+        emergency: {
+          rate: "$250 – $400 mob fee + $225 – $350 / hr",
+          details: "Critical fault mobilization and diagnostic labor outside standard business hours."
+        },
+        residential: {
+          rate: "$75 – $100 service fee",
+          details: "Flat-rate upfront pricing following assessment. Flat service call fee applies for diagnosis."
+        }
+      },
+      about: {
+        p1: "Ryan Waymire is a CSLB C-10 Licensed Electrical Contractor who brings a rigorous, analytical approach to electrical contracting. Having transitioned from leading high-volume electrical operations at major resort facilities to running an independent contracting firm, Ryan specializes in complex troubleshooting and heavy-duty infrastructure systems where standard technicians often fall short.",
+        p2: "Whether tracing intermittent faults on industrial PLC networks, servicing commercial motor controllers, or performing clean, code-compliant panel modifications for mountain properties, our operations are grounded in the belief that neatness, safety, and operational reliability are inseparable. Every system we install or diagnose is engineered for longevity and compliance."
+      }
+    };
+
+    let contentData = {...defaults};
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Passcode Session Check
+      const loginOverlay = document.getElementById('login-overlay');
+      const loginForm = document.getElementById('login-form');
+      const loginError = document.getElementById('login-error');
+      
+      const checkAuth = () => {
+        if (sessionStorage.getItem('admin_authenticated') === 'true') {
+          loginOverlay.style.display = 'none';
+          loadContent();
+        } else {
+          loginOverlay.style.display = 'flex';
+        }
+      };
+
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const enteredPasscode = document.getElementById('passcode').value;
+        if (enteredPasscode === DEFAULT_PASSCODE) {
+          sessionStorage.setItem('admin_authenticated', 'true');
+          loginOverlay.style.display = 'none';
+          loadContent();
+        } else {
+          loginError.style.display = 'block';
+          document.getElementById('passcode').value = '';
+        }
+      });
+
+      // Tabs handler
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const formSections = document.querySelectorAll('.form-section');
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => b.classList.remove('active'));
+          formSections.forEach(s => s.classList.remove('active'));
+
+          btn.classList.add('active');
+          document.getElementById(btn.dataset.tab).classList.add('active');
+        });
+      });
+
+      // Load config.json or fall back
+      const loadContent = () => {
+        fetch('/content.json')
+          .then(res => {
+            if (!res.ok) throw new Error("No config file found. Using defaults.");
+            return res.json();
+          })
+          .then(data => {
+            contentData = data;
+            populateForm();
+          })
+          .catch(err => {
+            console.log(err.message);
+            populateForm(); // load default fallback
+          });
+      };
+
+      // Fill in all inputs from data
+      const populateForm = () => {
+        // General
+        document.getElementById('phone').value = contentData.general?.phone || defaults.general.phone;
+        document.getElementById('email').value = contentData.general?.email || defaults.general.email;
+        document.getElementById('license').value = contentData.general?.license || defaults.general.license;
+        document.getElementById('calendly').value = contentData.general?.calendly || defaults.general.calendly;
+
+        // Hero
+        document.getElementById('hero-headline').value = contentData.hero?.headline || defaults.hero.headline;
+        document.getElementById('hero-subheadline').value = contentData.hero?.subheadline || defaults.hero.subheadline;
+
+        // Services
+        document.getElementById('service-ind-title').value = contentData.services?.industrial?.title || defaults.services.industrial.title;
+        document.getElementById('service-ind-desc').value = contentData.services?.industrial?.desc || defaults.services.industrial.desc;
+        document.getElementById('service-mv-title').value = contentData.services?.mv?.title || defaults.services.mv.title;
+        document.getElementById('service-mv-desc').value = contentData.services?.mv?.desc || defaults.services.mv.desc;
+        document.getElementById('service-em-title').value = contentData.services?.emergency?.title || defaults.services.emergency.title;
+        document.getElementById('service-em-desc').value = contentData.services?.emergency?.desc || defaults.services.emergency.desc;
+        document.getElementById('service-res-title').value = contentData.services?.residential?.title || defaults.services.residential.title;
+        document.getElementById('service-res-desc').value = contentData.services?.residential?.desc || defaults.services.residential.desc;
+
+        // Pricing
+        document.getElementById('price-ind-rate').value = contentData.pricing?.industrial?.rate || defaults.pricing.industrial.rate;
+        document.getElementById('price-ind-details').value = contentData.pricing?.industrial?.details || defaults.pricing.industrial.details;
+        document.getElementById('price-com-rate').value = contentData.pricing?.commercial?.rate || defaults.pricing.commercial.rate;
+        document.getElementById('price-com-details').value = contentData.pricing?.commercial?.details || defaults.pricing.commercial.details;
+        document.getElementById('price-em-rate').value = contentData.pricing?.emergency?.rate || defaults.pricing.emergency.rate;
+        document.getElementById('price-em-details').value = contentData.pricing?.emergency?.details || defaults.pricing.emergency.details;
+        document.getElementById('price-res-rate').value = contentData.pricing?.residential?.rate || defaults.pricing.residential.rate;
+        document.getElementById('price-res-details').value = contentData.pricing?.residential?.details || defaults.pricing.residential.details;
+
+        // About
+        document.getElementById('about-p1').value = contentData.about?.p1 || defaults.about.p1;
+        document.getElementById('about-p2').value = contentData.about?.p2 || defaults.about.p2;
+      };
+
+      // Form submission
+      const editorForm = document.getElementById('editor-form');
+      const saveStatus = document.getElementById('save-status');
+      const saveBtn = document.getElementById('save-btn');
+
+      editorForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
+        saveStatus.className = 'status-msg';
+        saveStatus.textContent = '';
+
+        // Assemble current data
+        const updatedData = {
+          general: {
+            phone: document.getElementById('phone').value,
+            email: document.getElementById('email').value,
+            license: document.getElementById('license').value,
+            calendly: document.getElementById('calendly').value
+          },
+          hero: {
+            headline: document.getElementById('hero-headline').value,
+            subheadline: document.getElementById('hero-subheadline').value
+          },
+          services: {
+            industrial: {
+              title: document.getElementById('service-ind-title').value,
+              desc: document.getElementById('service-ind-desc').value
+            },
+            mv: {
+              title: document.getElementById('service-mv-title').value,
+              desc: document.getElementById('service-mv-desc').value
+            },
+            emergency: {
+              title: document.getElementById('service-em-title').value,
+              desc: document.getElementById('service-em-desc').value
+            },
+            residential: {
+              title: document.getElementById('service-res-title').value,
+              desc: document.getElementById('service-res-desc').value
+            }
+          },
+          pricing: {
+            industrial: {
+              rate: document.getElementById('price-ind-rate').value,
+              details: document.getElementById('price-ind-details').value
+            },
+            commercial: {
+              rate: document.getElementById('price-com-rate').value,
+              details: document.getElementById('price-com-details').value
+            },
+            emergency: {
+              rate: document.getElementById('price-em-rate').value,
+              details: document.getElementById('price-em-details').value
+            },
+            residential: {
+              rate: document.getElementById('price-res-rate').value,
+              details: document.getElementById('price-res-details').value
+            }
+          },
+          about: {
+            p1: document.getElementById('about-p1').value,
+            p2: document.getElementById('about-p2').value
+          }
+        };
+
+        // POST back to server
+        fetch('/api/save', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updatedData)
+        })
+        .then(res => {
+          if (!res.ok) throw new Error("Server error, could not save modifications.");
+          return res.json();
+        })
+        .then(data => {
+          saveStatus.className = 'status-msg status-success';
+          saveStatus.textContent = 'Changes saved successfully!';
+          contentData = updatedData;
+          
+          setTimeout(() => { saveStatus.textContent = ''; }, 4000);
+        })
+        .catch(err => {
+          saveStatus.className = 'status-msg status-error';
+          saveStatus.textContent = err.message;
+        })
+        .finally(() => {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save Changes';
+        });
+      });
+
+      checkAuth();
+    });
+  </script>
+</body>
+</html>

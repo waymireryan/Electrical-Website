@@ -1,0 +1,5 @@
+.gemini/
+*.log
+test*.jpg
+test_*.jpg
+scratch/
