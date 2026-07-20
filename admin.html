@@ -215,10 +215,7 @@
             <label for="license">CSLB C-10 License Number</label>
             <input type="text" id="license" class="form-control" required>
           </div>
-          <div class="form-group">
-            <label for="calendly">Calendly Booking Link</label>
-            <input type="url" id="calendly" class="form-control" placeholder="https://calendly.com/your-username" required>
-          </div>
+
         </div>
 
         <!-- Tab 2: Hero Section -->
@@ -360,8 +357,7 @@
       general: {
         phone: "(909) 555-0199",
         email: "service@ryanwaymire.com",
-        license: "1084920",
-        calendly: "https://calendly.com/ryanwaymire"
+        license: "1084920"
       },
       hero: {
         headline: "Expert Diagnostics. Reliable Power.",
@@ -476,7 +472,6 @@
         document.getElementById('phone').value = contentData.general?.phone || defaults.general.phone;
         document.getElementById('email').value = contentData.general?.email || defaults.general.email;
         document.getElementById('license').value = contentData.general?.license || defaults.general.license;
-        document.getElementById('calendly').value = contentData.general?.calendly || defaults.general.calendly;
 
         // Hero
         document.getElementById('hero-headline').value = contentData.hero?.headline || defaults.hero.headline;
@@ -524,8 +519,7 @@
           general: {
             phone: document.getElementById('phone').value,
             email: document.getElementById('email').value,
-            license: document.getElementById('license').value,
-            calendly: document.getElementById('calendly').value
+            license: document.getElementById('license').value
           },
           hero: {
             headline: document.getElementById('hero-headline').value,

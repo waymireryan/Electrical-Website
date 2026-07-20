@@ -48,7 +48,6 @@
         <!-- Native tel: link for instant mobile call during outages -->
         <div class="hero-actions">
           <a href="tel:+19095550199" class="btn" id="hero-cta-btn">Call for Service: (909) 555-0199</a>
-          <a href="https://calendly.com/ryanwaymire" target="_blank" rel="noopener" class="btn btn-secondary" id="hero-booking-btn">Book Appointment</a>
         </div>
       </div>
     </section>
@@ -246,18 +245,7 @@
                   <a href="mailto:service@ryanwaymire.com" id="contact-email-link">service@ryanwaymire.com</a>
                 </span>
               </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                  <line x1="16" y1="2" x2="16" y2="6"></line>
-                  <line x1="8" y1="2" x2="8" y2="6"></line>
-                  <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
-                <span>
-                  <strong>Online Scheduling</strong>
-                  <a href="https://calendly.com/ryanwaymire" target="_blank" rel="noopener" id="contact-booking-link" style="font-weight: 600; color: var(--accent);">Book Appointment Online</a>
-                </span>
-              </li>
+
               <li>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -439,16 +427,7 @@
                   footerLicense.textContent = data.general.license;
                 }
               }
-              if (data.general.calendly) {
-                const heroBooking = document.getElementById('hero-booking-btn');
-                if (heroBooking) {
-                  heroBooking.href = data.general.calendly;
-                }
-                const contactBooking = document.getElementById('contact-booking-link');
-                if (contactBooking) {
-                  contactBooking.href = data.general.calendly;
-                }
-              }
+
             }
 
             if (data.hero) {
