@@ -307,6 +307,17 @@
 
           <div class="form-row">
             <div class="form-group">
+              <label for="price-mv-rate">Medium Voltage Rate</label>
+              <input type="text" id="price-mv-rate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="price-mv-details">Medium Voltage Details</label>
+              <input type="text" id="price-mv-details" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
               <label for="price-em-rate">Emergency Rate</label>
               <input type="text" id="price-em-rate" class="form-control" required>
             </div>
@@ -388,14 +399,18 @@
         },
         commercial: {
           rate: "$130 – $175 / hr",
-          details: "Facility infrastructure, circuit isolation, and distribution work. Custom project bidding available."
+          details: "Standard facility infrastructure, circuit isolation, and distribution work. Custom project bidding available."
+        },
+        mv: {
+          rate: "$175 – $225+ / hr",
+          details: "High-liability terminations, transformer feeder upgrades, and high-voltage systems."
         },
         emergency: {
           rate: "$250 – $400 mob fee + $225 – $350 / hr",
           details: "Critical fault mobilization and diagnostic labor outside standard business hours."
         },
         residential: {
-          rate: "$75 – $100 service fee",
+          rate: "$125 – $150 service fee",
           details: "Flat-rate upfront pricing following assessment. Flat service call fee applies for diagnosis."
         }
       },
@@ -492,6 +507,8 @@
         document.getElementById('price-ind-details').value = contentData.pricing?.industrial?.details || defaults.pricing.industrial.details;
         document.getElementById('price-com-rate').value = contentData.pricing?.commercial?.rate || defaults.pricing.commercial.rate;
         document.getElementById('price-com-details').value = contentData.pricing?.commercial?.details || defaults.pricing.commercial.details;
+        document.getElementById('price-mv-rate').value = contentData.pricing?.mv?.rate || defaults.pricing.mv.rate;
+        document.getElementById('price-mv-details').value = contentData.pricing?.mv?.details || defaults.pricing.mv.details;
         document.getElementById('price-em-rate').value = contentData.pricing?.emergency?.rate || defaults.pricing.emergency.rate;
         document.getElementById('price-em-details').value = contentData.pricing?.emergency?.details || defaults.pricing.emergency.details;
         document.getElementById('price-res-rate').value = contentData.pricing?.residential?.rate || defaults.pricing.residential.rate;
@@ -551,6 +568,10 @@
             commercial: {
               rate: document.getElementById('price-com-rate').value,
               details: document.getElementById('price-com-details').value
+            },
+            mv: {
+              rate: document.getElementById('price-mv-rate').value,
+              details: document.getElementById('price-mv-details').value
             },
             emergency: {
               rate: document.getElementById('price-em-rate').value,

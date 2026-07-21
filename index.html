@@ -148,10 +148,18 @@
 
             <div class="pricing-row">
               <div class="pricing-info">
-                <h3 class="pricing-title">Commercial & Medium Voltage</h3>
-                <p class="pricing-details" id="p-com-details">Facility infrastructure, circuit isolation, and distribution work. Custom project bidding available.</p>
+                <h3 class="pricing-title">Commercial Infrastructure</h3>
+                <p class="pricing-details" id="p-com-details">Standard facility infrastructure, circuit isolation, and distribution work. Custom project bidding available.</p>
               </div>
               <div class="pricing-rate" id="p-com-rate">$130 – $175 / hr</div>
+            </div>
+
+            <div class="pricing-row">
+              <div class="pricing-info">
+                <h3 class="pricing-title">Medium Voltage Terminations</h3>
+                <p class="pricing-details" id="p-mv-details">High-liability terminations, transformer feeder upgrades, and high-voltage systems.</p>
+              </div>
+              <div class="pricing-rate" id="p-mv-rate">$175 – $225+ / hr</div>
             </div>
 
             <div class="pricing-row">
@@ -167,7 +175,7 @@
                 <h3 class="pricing-title">Residential Services</h3>
                 <p class="pricing-details" id="p-res-details">Flat-rate upfront pricing following assessment. Flat service call fee applies for diagnosis.</p>
               </div>
-              <div class="pricing-rate" id="p-res-rate">$75 – $100 <span style="font-size:0.85rem; font-weight:normal; color:var(--text-secondary);">service fee</span></div>
+              <div class="pricing-rate" id="p-res-rate">$125 – $150 <span style="font-size:0.85rem; font-weight:normal; color:var(--text-secondary);">service fee</span></div>
             </div>
 
           </div>
@@ -469,6 +477,12 @@
                 if (data.pricing.commercial.details) document.getElementById('p-com-details').textContent = data.pricing.commercial.details;
                 if (data.pricing.commercial.rate) {
                   document.getElementById('p-com-rate').textContent = data.pricing.commercial.rate;
+                }
+              }
+              if (data.pricing.mv) {
+                if (data.pricing.mv.details) document.getElementById('p-mv-details').textContent = data.pricing.mv.details;
+                if (data.pricing.mv.rate) {
+                  document.getElementById('p-mv-rate').textContent = data.pricing.mv.rate;
                 }
               }
               if (data.pricing.emergency) {
