@@ -455,7 +455,7 @@
                   contactEmail.textContent = data.general.email;
                 }
               }
-              if (data.general.license) {
+              if (data.general.license && data.general.license !== 'TBD') {
                 const footerLicense = document.getElementById('footer-license-num');
                 if (footerLicense) {
                   footerLicense.textContent = data.general.license;

@@ -1,0 +1,55 @@
+{
+  "general": {
+    "phone": "(909) 642-4954",
+    "email": "waymire.ryan@gmail.com",
+    "license": "1163006"
+  },
+  "hero": {
+    "headline": "Expert Diagnostics. Reliable Power.",
+    "subheadline": "Industrial controls, commercial infrastructure, and premium residential upgrades serving the Inland Empire, High Desert, and Mountain Communities."
+  },
+  "services": {
+    "industrial": {
+      "title": "Industrial & Commercial",
+      "desc": "Specializing in PLCs, motor controls, medium voltage distribution, and facility maintenance to minimize downtime."
+    },
+    "mv": {
+      "title": "Medium Voltage Terminations",
+      "desc": "Certified by AVO Training Institute for medium-voltage cable splicing and terminating (up to 35kV) to ensure safe, compliant industrial installations."
+    },
+    "emergency": {
+      "title": "24/7 Emergency Diagnostics",
+      "desc": "Rapid-response troubleshooting for critical infrastructure and manufacturing operations. We find faults others miss."
+    },
+    "residential": {
+      "title": "Residential Upgrades",
+      "desc": "Code-compliant panel upgrades (100A to 200A) and dedicated circuitry for modern mountain homes."
+    }
+  },
+  "pricing": {
+    "industrial": {
+      "rate": "$150 – $225 / hr",
+      "details": "Time & Materials, 4-hour minimum. Includes PLC diagnostics and system telemetry analysis."
+    },
+    "commercial": {
+      "rate": "$130 – $175 / hr",
+      "details": "Standard facility infrastructure, circuit isolation, and distribution work. Custom project bidding available."
+    },
+    "mv": {
+      "rate": "$175 – $225+ / hr",
+      "details": "High-liability terminations, transformer feeder upgrades, and high-voltage systems."
+    },
+    "emergency": {
+      "rate": "$250 – $400 mob fee + $225 – $350 / hr",
+      "details": "Critical fault mobilization and diagnostic labor outside standard business hours."
+    },
+    "residential": {
+      "rate": "$125 – $150 service fee",
+      "details": "Flat-rate upfront pricing following assessment. Flat service call fee applies for diagnosis."
+    }
+  },
+  "about": {
+    "p1": "Ryan Waymire is a CSLB C-10 Licensed Electrical Contractor who brings a rigorous, analytical approach to electrical contracting. Having transitioned from leading high-volume electrical operations at major resort facilities to running an independent contracting firm, Ryan specializes in complex troubleshooting and heavy-duty infrastructure systems where standard technicians often fall short.",
+    "p2": "Whether tracing intermittent faults on industrial PLC networks, servicing commercial motor controllers, or performing clean, code-compliant panel modifications for mountain properties, our operations are grounded in the belief that neatness, safety, and operational reliability are inseparable. Every system we install or diagnose is engineered for longevity and compliance."
+  }
+}
